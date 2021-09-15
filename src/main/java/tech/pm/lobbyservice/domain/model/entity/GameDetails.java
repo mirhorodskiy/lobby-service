@@ -13,12 +13,12 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "game_lobby_ids")
+@Table(name = "game_details")
 public class GameDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JsonIgnore
-  @Column(name = "game_lobby_id")
+  @Column(name = "game_details_id")
   private Long id;
 
   @Column(name = "provider_id")
