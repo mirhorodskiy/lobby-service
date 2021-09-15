@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -16,11 +18,13 @@ public class Country {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JsonIgnore
+  @Column(name = "country_id")
   private Long id;
 
   @Column(unique = true)
   private String name;
 
-  @ManyToOne
-  private GameLobbyId gameLobbyId;
+  @ManyToMany(mappedBy = "availableCountriesSet")
+  @JsonIgnore
+  private List<GameDetails> gameDetailsSet;
 }

@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -15,11 +17,13 @@ public class Currency {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JsonIgnore
+  @Column(name = "currency_id")
   private Long id;
 
   @Column(unique = true)
   private String title;
 
-  @ManyToOne
-  private GameLobbyId gameLobbyId;
+  @ManyToMany(mappedBy = "availableCurrenciesSet")
+  @JsonIgnore
+  private List<GameDetails> gameDetailsSet;
 }
