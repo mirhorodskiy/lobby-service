@@ -27,11 +27,11 @@ public class GameLobbyIdController {
 
   //get all games by token
   @GetMapping()
-  public List<GameDetails> getAllGamesByPlayer(@RequestParam String token, @RequestParam Map<String, String> allParameters)
+  public List<GameDetails> getAllGamesByPlayer(@RequestParam String sessionToken)
           throws WrongHashCodeException, EmptyGameAndProviderListException {
 
-    gameDetailsService.hashCodeVerification(allParameters);
-    return gameDetailsService.getAllGamesAndProvidersByPlayer(token);
+   // gameDetailsService.hashCodeVerification(allParameters);
+    return gameDetailsService.getAllGamesAndProvidersByPlayer(sessionToken);
   }
 
   @PostMapping("/addGame")
@@ -40,14 +40,14 @@ public class GameLobbyIdController {
   }
 
   @GetMapping("/launch")
-  public String getLaunchUrl(@RequestParam String gameTitle,
-                             @RequestParam String providerTitle, @RequestParam String sessionKey) {
-    String uri = "http://gameRepositoryService/getUrl" + "?gameTitle=" +
-            gameTitle +
-            "&providerTitle=" +
-            providerTitle +
-            "&sessionKey=" +
-            sessionKey;
+  public String getLaunchUrl(@RequestParam String game_id,
+                             @RequestParam String provider_id, @RequestParam String sessionToken) {
+    String uri = "http://localhost:8081/launch" + "?game_id=" +
+            game_id +
+            "&provider_id=" +
+            provider_id +
+            "&sessionToken=" +
+            sessionToken;
     RestTemplate restTemplate = new RestTemplate();
     return restTemplate.getForObject(uri, String.class);
   }
