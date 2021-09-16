@@ -25,5 +25,5 @@ public class Currency {
 
   @ManyToMany(mappedBy = "availableCurrenciesSet")
   @JsonIgnore
-  private List<GameDetails> gameDetailsSet;
+  private Set<GameDetails> gameDetailsSet;
 }

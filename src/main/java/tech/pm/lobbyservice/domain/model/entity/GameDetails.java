@@ -32,12 +32,12 @@ public class GameDetails {
   @JoinTable(name = "game_country", joinColumns = @JoinColumn(name = "game_lobby_id"),
           inverseJoinColumns = @JoinColumn(name = "country_id"))
   @JsonIgnore
-  private List<Country> availableCountriesSet;
+  private Set<Country> availableCountriesSet;
 
 
   @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(name = "game_currency", joinColumns = @JoinColumn(name = "game_lobby_id"),
           inverseJoinColumns = @JoinColumn(name = "currency_id"))
   @JsonIgnore
-  private List<Currency> availableCurrenciesSet;
+  private Set<Currency> availableCurrenciesSet;
 }

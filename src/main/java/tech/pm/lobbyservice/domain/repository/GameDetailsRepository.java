@@ -12,6 +12,9 @@ public interface GameDetailsRepository extends CrudRepository<GameDetails, Long>
 
   Boolean existsByProviderNameAndGameName(String providerName, String gameName);
 
+  GameDetails getGameDetailsByProviderNameAndGameName(String providerName, String gameName);
+
+
   @Query("select distinct g from GameDetails g " +
           "join g.availableCurrenciesSet currency join g.availableCountriesSet country " +
           "where currency.title = ?2 and country.name = ?1")

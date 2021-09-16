@@ -26,5 +26,5 @@ public class Country {
 
   @ManyToMany(mappedBy = "availableCountriesSet")
   @JsonIgnore
-  private List<GameDetails> gameDetailsSet;
+  private Set<GameDetails> gameDetailsSet;
 }
