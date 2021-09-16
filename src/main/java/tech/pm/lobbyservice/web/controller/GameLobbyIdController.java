@@ -9,6 +9,7 @@ import tech.pm.lobbyservice.domain.model.exception.GameWithThatProviderAlreadyEx
 import tech.pm.lobbyservice.domain.model.exception.WrongGameOrProviderNameException;
 import tech.pm.lobbyservice.domain.model.exception.WrongLaunchUrlException;
 import tech.pm.lobbyservice.domain.service.GameDetailsService;
+import tech.pm.lobbyservice.domain.util.HashCodeUtil;
 
 import java.util.List;
 
@@ -31,7 +32,6 @@ public class GameLobbyIdController {
   public List<GameDetails> getAllGamesByPlayer(@RequestParam String sessionToken)
           throws EmptyGameAndProviderListException {
 
-    // gameDetailsService.hashCodeVerification(allParameters);
     return gameDetailsService.getAllGamesAndProvidersByPlayer(sessionToken);
   }
 
@@ -45,24 +45,19 @@ public class GameLobbyIdController {
                              @RequestParam String provider_id,
                              @RequestParam String sessionToken)
           throws WrongLaunchUrlException, WrongGameOrProviderNameException {
-    gameDetailsService.checkIfGameAvailableForCurrentPlayer(game_id, provider_id, sessionToken);
+    //gameDetailsService.checkIfGameAvailableForCurrentPlayer(game_id, provider_id, sessionToken);
     String uri = "http://localhost:8081/launch" +
             "?game_id=" +
             game_id +
             "&provider_id=" +
             provider_id +
             "&sessionToken=" +
-            sessionToken;
+            sessionToken +
+            "&hash="+
+            HashCodeUtil.getHashSign(game_id, provider_id, sessionToken);
     RestTemplate restTemplate = new RestTemplate();
     return restTemplate.getForObject(uri, String.class);
   }
 
 
-//  @PostMapping("/assignCountries")
-//  public String assignCountriesToGame(@RequestParam String game_id,
-//                                      @RequestParam String provider_id,
-//                                      @RequestBody CountriesListDto countriesListDto) {
-//
-//    return "Countries assigned!";
-//  }
 }

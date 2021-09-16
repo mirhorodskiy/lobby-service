@@ -13,19 +13,9 @@ public class HashCodeUtil {
 
   private static final Logger LOG = Logger.getLogger(HashCodeUtil.class);
 
-  public static String getHashSign(Map<String, String> properties) {
+  public static String getHashSign(String game_id, String provider_id, String sessionToken) {
     LOG.info("Calculating hash");
-    StringBuilder builder = new StringBuilder();
-    List<String> keys = properties.keySet().stream()
-            .filter((s) -> !s.equals("hash"))
-            .sorted()
-            .collect(Collectors.toList());
-    for (String key : keys) {
-      builder.append(properties.get(key));
-    }
-    builder.append(SecretSaltFactory.getSecretSaltValue());
-
-    return hashCodeMD5(builder.toString());
+    return hashCodeMD5(game_id + provider_id + sessionToken + SecretSaltFactory.getSecretSaltValue());
   }
 
 

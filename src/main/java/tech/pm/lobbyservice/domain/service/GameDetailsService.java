@@ -55,15 +55,15 @@ public class GameDetailsService {
     return gameDetailsRepository.findGameDetailsByCurrencyAndCountry(player.getCountry(), player.getCurrency());
   }
 
-  public void hashCodeVerification(Map<String, String> parameters) throws WrongHashCodeException {
-    String hash = parameters.get("hash");
-    parameters.remove("hash");
-    if (!HashCodeUtil.getHashSign(parameters).equals(hash)) {
-      LOG.warn("Hashcode verification failed!");
-      throw new WrongHashCodeException("Mismatched hashcode");
-    }
-    LOG.info("Hashcode verification passed!");
-  }
+//  public void hashCodeVerification(Map<String, String> parameters) throws WrongHashCodeException {
+//    String hash = parameters.get("hash");
+//    parameters.remove("hash");
+//    if (!HashCodeUtil.getHashSign(parameters).equals(hash)) {
+//      LOG.warn("Hashcode verification failed!");
+//      throw new WrongHashCodeException("Mismatched hashcode");
+//    }
+//    LOG.info("Hashcode verification passed!");
+//  }
 
   private GameDetails getGameDetailsByProviderNameAndGameName(String game_id, String provider_id)
           throws WrongGameOrProviderNameException {
